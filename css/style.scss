@@ -1,2 +1,72 @@
-@use 'main.css';
-@use 'normalize.css';
+@use 'normalize';
+@use 'sass:list';
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,900&display=swap);
+
+// Variables
+$primary: #0893E1;
+$primary-light: #ADD9F2;
+$dark: #33434C;
+$light: #FFFFFF;
+
+$background: $light;
+$links: $primary;
+$text: $dark;
+
+$font-stack: 'Roboto', 'Open Sans', 'Helvetica', sans-serif;
+$font-regular: 400;
+$font-bold: 500;
+$font-black: 900;
+
+// Sizes
+$size-1: rem-calc(8px);
+$size-2: rem-calc(16px);
+$size-3: rem-calc(24px);
+$size-4: rem-calc(32px);
+$size-5: rem-calc(40px);
+
+$root: 16px;
+
+@function rem-calc($size) {
+    $remSize: $size / $root;
+    @return #{$remSize}rem;
+}
+
+@function rem-calc-m($sizes) {
+    $result: ();
+    @each $size in $sizes {
+        $result: list.append($result, rem-calc($size));
+    };
+    @return $result;
+}
+
+html {
+    font-size: $root;
+}
+
+body {
+    background: $background;
+    color: $dark;
+    font-size: $size-2;
+    font-family: $font-stack;
+    font-weight: $font-regular;
+    line-height: 1.5;
+}
+
+h1 {
+    color: $primary;
+    font-size: rem-calc(48px);
+    font-weight: $font-black;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: rem-calc(600px) auto;
+}
+
+.container-left {
+    padding: rem-calc-m(100px 200px 100px 50px);
+}
+
+.container-right {
+    background: $primary-light;
+}
